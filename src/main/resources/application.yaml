@@ -2,6 +2,7 @@ server:
   port: 8080
 
 spring:
+#  ------- db config -------
   application:
     name: user-service
   datasource:
@@ -17,3 +18,13 @@ spring:
     properties:
       hibernate:
         use_sql_comments: true
+
+#  ------- kafka config -------
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic: user-info
+    consumer:
+      group-id: user-info
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: com.tasnim.userservice.deserializer.UserInfoDeserializer
